@@ -10,7 +10,7 @@ from shutil import copytree, rmtree
 
 
 home_dir = os.path.expanduser("~")
-init_path = "recup_dir"
+init_path = "downloads_"
 path_to_scan = os.path.join(home_dir, init_path)
 end_path = os.path.join(home_dir, init_path + "_out")
 fsus.create_path(end_path)
@@ -25,13 +25,16 @@ types = [
     'doc',
     'jpeg',
     'rtf',
+    'x-python',
+    'plain',
+    'png'
 ]
 
 
 class GetListFiles:
 
     def __init__(self, root_path):
-        import pdb; pdb.set_trace
+        # import pdb; pdb.set_trace
         self.config = SafeConfigParser()
         self.config.read('/home/kripton/Dropbox/scripts/settings/main.ini')
         # self.types = self.config["main"].items()[0][1].split(",")
@@ -40,23 +43,30 @@ class GetListFiles:
 
     def GetListParsed(self, mode=None):
         InpuList = fsus.GetListFile(self.root_path)
+        # print type(InpuList)
         Result = {}
-
+        Result["other"] = []
         if mode:
-            Result["other"] = InpuList
-            return Result
-
-        for _type in self.types:
-            Result[_type] = []
-
-        for _type in self.types:
-            for item in InpuList:
+            # Result["other"] = InpuList
+            # return Result
+            pass
+        else:
+            for i, item in enumerate(InpuList):
                 temp_file = CMagic(item)
-                # print "<---> %s <---> %s" % (temp_file.getType(),_type)
-                # import pdb; pdb.set_trace()
-                if temp_file.is_(_type):
-                    Result[_type].append(item)
-            # Result["all"] = InpuList
+                __type = None
+                for _type in self.types:
+                    if temp_file.is_(_type):
+                        __type = _type
+                        break
+
+                pop_item = InpuList.pop(i)
+                if __type:
+                    if not __type in Result:
+                        Result[__type] = []
+                    Result[__type].append(pop_item)
+                else:
+                    Result["other"].append(pop_item)
+
         return Result
 
     def MoveFiles(self, list_files):
@@ -69,7 +79,9 @@ class GetListFiles:
 
 
 list_ = GetListFiles(path_to_scan)
+# import debug
 list__ = list_.GetListParsed()
+import debug
 list_.MoveFiles(list__)
 list__ = list_.GetListParsed("other")
 list_.MoveFiles(list__)
