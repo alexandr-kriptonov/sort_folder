@@ -1,2 +1,3 @@
-/utils/__init__.pyc
-/utils/filesutils.pyc
+*.pyc
+.gitignore
+/root_log.log
