@@ -7,6 +7,7 @@ import logging.config
 from optparse import OptionParser
 import sys
 from files_to_sort import Files_to_sort
+import ConfigParser
 
 
 def params():
@@ -31,7 +32,11 @@ try:
     _log.info("Start!")
     path_to_scan = params()
     if path_to_scan:
-        list_ = Files_to_sort(path_to_scan)
+        main_config = ConfigParser.SafeConfigParser()
+        main_config.read("settings/main.ini")
+        types = main_config.get('main', 'types').split(",")
+
+        list_ = Files_to_sort(path_to_scan, types)
         _log.info("Getting parsed list of files.")
         list_.GetListParsed()
         _log.info("Generated new filenames.")
@@ -39,9 +44,9 @@ try:
         _log.info("Moving files.")
         list_.move_files()
         sys.stdout.write("Files in '%s' sorted by types!\n" % (path_to_scan))
-        _log.info("Finish!\n")
+        _log.info("Finish!")
     else:
         sys.stdout.write("No scan dirrectory!\nPlease use option -h for help\n")
 except KeyboardInterrupt:
     sys.stdout.write("Stopped!\n")
-    _log.exception("Program aborted by user!\n")
+    _log.exception("Program aborted by user!")

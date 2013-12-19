@@ -8,26 +8,10 @@ from utils import progressbar
 from utils.progressbar import ETA, Bar
 import sys
 
-types = [
-    'bittorrent',
-    'mpeg',
-    'other',
-    'zip',
-    'pdf',
-    'vnd.djvu',
-    'doc',
-    'jpeg',
-    'rtf',
-    'x-python',
-    'plain',
-    'png',
-    'mp3'
-]
-
 
 class Files_to_sort(object):
 
-    def __init__(self, root_path):
+    def __init__(self, root_path, types=None):
         self.types = types
         self.root_path = root_path
         self.l_filenames_parsed = None
