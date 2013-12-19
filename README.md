@@ -1,7 +1,7 @@
 Sort files by type in path.
 
-Run: ./ Sort_folder.py-d /path/to/sort
+Run: ./sort_folder.py -d /path/to/sort
 
-File Types: settings / main.ini
+File types from: settings/main.ini
 
-Setup log: settings/logging.conf
+Setup log from: settings/logging.conf
