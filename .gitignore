@@ -2,3 +2,4 @@
 .gitignore
 /root_log.log
 /sort_files_log.log
+/logs/sort_files.log
