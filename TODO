@@ -1,5 +1,5 @@
 1 - write README.md
-2 - fix many subdirrections under multiple run script
+2 - fix many subdirrections under multiple run script(Fixed!)
 3 - add args, kwargs for script
 4 - add options for dirrections(subdirrections etc)
 5 - final refactoring

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import ctypes
 
@@ -36,18 +35,6 @@ class CMagic:
     def getType(self):
         self.mime = self.getMType()
         return self.mime
-
-    def is_torrent(self):
-        self.getType()
-        if self.mime.count("bittorrent"):
-            return 1
-        return 0
-
-    def is_mpeg(self):
-        self.getType()
-        if self.mime.count("mpeg"):
-            return 1
-        return 0
 
     def is_(self, _type):
         self.getType()

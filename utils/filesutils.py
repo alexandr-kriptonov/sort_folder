@@ -1,17 +1,16 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
 import shutil
 
 
-def GetListFile(RootPath):
+def get_list_files(RootPath):
     ListFiles = []
     for filename in os.listdir(RootPath):
         path = os.path.join(RootPath, filename)
         if not os.path.isdir(path):
             ListFiles.append(path)
         else:
-            ListFiles += GetListFile(path)
+            ListFiles += get_list_files(path)
     return ListFiles
 
 
